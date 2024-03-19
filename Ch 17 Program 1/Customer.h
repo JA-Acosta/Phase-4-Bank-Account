@@ -6,7 +6,7 @@ namespace customer {
 	using std::string;
 	class Customer
 	{
-
+		// If I have time create a person class.
 		// Used to determine the customer ID for each customer.
 		static int Customers;
 		string First;
@@ -14,6 +14,7 @@ namespace customer {
 		string Address;
 		string Phone;
 		int CustomerID;
+	
 	public:
 		/* Default constructor that sets the customers first and last name. The number
 		* of Customers is updated and the CustomerID is set.
