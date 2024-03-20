@@ -3,7 +3,7 @@
 #include "Account.h"
 using namespace account;
 
-class Certificate : protected Account
+class Certificate : public Account
 {
 protected : 
 	int MaturityTime;

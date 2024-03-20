@@ -1,14 +1,26 @@
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
+#include <vector>
+#include <map>
 #include <string>
+#include "Account.h"
+#include "Checking.h"
+#include "Savings.h"
+#include "MoneyMarket.h"
+#include "Certificate.h"
+#include <iostream>
 
 namespace customer {
-	using std::string;
+	using namespace account;
+	using std::string; using std::to_string; using std::vector;
+	using std::map; using std::find; using std::move;
 	class Customer
 	{
 		// If I have time create a person class.
 		// Used to determine the customer ID for each customer.
 		static int Customers;
+		map<int, string> accountTypes; // [int accountNumber: string "Type"]
+		vector<Account> allAccounts;
 		string First;
 		string Last;
 		string Address;
@@ -29,12 +41,16 @@ namespace customer {
 		{	return CustomerID;	}
 
 		/* Retrieves the customers full name in the for "Last, First".
-		* return string Full Name
+		* Return: string Full Name
 		*/
 		string getName() const
-		{
-			return this->Last + ", " + this->First;
-		}
+		{	return this->Last + ", " + this->First;	}
+
+		/* Retrieves the customers last name.
+		* Return: string last
+		*/
+		string getLast() const
+		{	return this->Last;	}
 
 		/* Sets the address for the customer account.
 		* Param: string Address
@@ -59,6 +75,49 @@ namespace customer {
 		*/
 		string getPhone() const
 		{	return this->Phone;	}
+
+
+		/* Takes the initial balance passed and the account type passed and then creates
+		* an instance of an account of that type with the initial balance. Afterwards,
+		* a pointer to the account is returned so the account can be accessed immediately.
+		* Param: double initialBalance, int type
+		* Return: Account* acc
+		*/
+		Account* makeAccount(double initialBalance, int type);
+		
+		/* Prints the list of all accounts the user currently grouped by account types.
+		* Checks all types and if the user doesn't have an account of a specific type,
+		* the category is left blank.
+		* All accounts will be represented by their accountID.
+		* Return: string listOfAccounts
+		*/
+		string listAccounts();
+
+		/*Prints the list of all accounts based on a specific account type. If the
+		* customer doesn't have an account of that type, returns the account title.
+		* Param: str accType
+		*	[checkings, savings, market, certificate3, certificate6, certificate12]
+		* return: string listOfAccounts
+		*/
+		string listAccounts(string accType);
+
+		/* Checks if a user has any accounts in their account list. If true returns 1
+		* otherwise, returns 0.
+		* Return: allAccounts.size();
+		*/
+		bool hasAccounts() {	return allAccounts.size();	}
+
+		/* Retrieves a users account based on the account number. If there isn't an
+		* account, returns a nullptr.
+		* Param: int accountNumber
+		* Return: Account acc
+		*/
+		Account* getAccount(int accountNumber);
+
+		/* Retrieves the total number of customers that currently have accounts in the bank.
+		* Return: int Customer
+		*/
+		static int getTotalCustomer() {	return Customers;	}
 
 		~Customer();
 	};

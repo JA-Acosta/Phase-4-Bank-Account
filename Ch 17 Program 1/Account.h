@@ -6,10 +6,13 @@
 
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
-
+#include <string>
+#include <cctype>
 
 namespace account
 {
+	using std::string; using std::to_string;
+
 class Account 
 {
 	// Number of accounts
@@ -35,6 +38,15 @@ public:
 	*/
 	int getAccountNumber() const
 	{	return this->AccountNumber;	}
+
+	// UPDATE SO IT RETURNS THE BALANCE WITH ONLY TWO DECIMALS.
+	/* Retrieves the pertinent account information; account balance and number.
+	* returns: string accInfo
+	*/
+	string getAccountInfo() const
+	{	return "Account information: \n    Account Number:  " + 
+		to_string(this->AccountNumber) + "\n    Account Balance: $" +
+		to_string(this->balance) + "\n";	}
 
 	/* Retrieve the current accounts balance.
 	* Return: double balance
